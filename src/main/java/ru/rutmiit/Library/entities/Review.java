@@ -13,14 +13,16 @@ public class Review {
 
     private Long readerId;
 
-    private Long bookId;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
     private String comment;
 
     public Review(Long commentId, Long readerId, Long bookId, String comment) {
         this.commentId = commentId;
         this.readerId = readerId;
-        this.bookId = bookId;
+        this.book = book;
         this.comment = comment;
     }
 
@@ -42,11 +44,12 @@ public class Review {
         this.readerId = readerId;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getComment() {
