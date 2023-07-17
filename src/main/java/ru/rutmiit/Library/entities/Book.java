@@ -14,6 +14,7 @@ public class Book {
 
     private String title;
 
+    @Column(name = "author")
     private String author;
 
     @Column(name = "publication_year")

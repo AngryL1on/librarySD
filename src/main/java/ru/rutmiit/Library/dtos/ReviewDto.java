@@ -13,6 +13,9 @@ public class ReviewDto {
         this.comment = comment;
     }
 
+    public ReviewDto() {
+    }
+
     public int getReviewId() {
         return reviewId;
     }

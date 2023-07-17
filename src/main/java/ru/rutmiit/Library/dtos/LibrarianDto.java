@@ -13,6 +13,9 @@ public class LibrarianDto {
         this.phoneNumber = phoneNumber;
     }
 
+    public LibrarianDto() {
+    }
+
     public int getLibrarianId() {
         return librarianId;
     }

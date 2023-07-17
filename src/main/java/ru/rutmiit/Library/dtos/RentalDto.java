@@ -8,6 +8,16 @@ public class RentalDto {
     private Timestamp rentalDate;
     private Timestamp dueDate;
 
+    public RentalDto(Integer bookId, Integer readerId, Timestamp rentalDate, Timestamp dueDate) {
+        this.bookId = bookId;
+        this.readerId = readerId;
+        this.rentalDate = rentalDate;
+        this.dueDate = dueDate;;
+    }
+
+    public RentalDto() {
+    }
+
     public Integer getBookId() {
         return bookId;
     }

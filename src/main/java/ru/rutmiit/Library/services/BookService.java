@@ -69,7 +69,7 @@ public class BookService {
     }
 
     public Optional<BookDto> findBooksByAuthor(String author) {
-        return Optional.ofNullable((BookDto) this.modelMapper.map(this.bookRepository.findByAutor(author), BookDto.class));
+        return Optional.ofNullable((BookDto) this.modelMapper.map(this.bookRepository.findByAuthor(author), BookDto.class));
     }
 
     public Optional<Object> findBookByPublicationYear(Integer publicationYear) {

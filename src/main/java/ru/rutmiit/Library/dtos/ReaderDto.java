@@ -15,6 +15,9 @@ public class ReaderDto {
         this.phoneNumber = phoneNumber;
     }
 
+    public ReaderDto() {
+    }
+
     public int getReaderId() {
         return readerId;
     }

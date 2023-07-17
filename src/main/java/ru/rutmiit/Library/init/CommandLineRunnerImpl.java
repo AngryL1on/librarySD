@@ -6,10 +6,8 @@ import org.springframework.stereotype.Component;
 import ru.rutmiit.Library.dtos.BookDto;
 import ru.rutmiit.Library.services.BookService;
 
-import java.io.PrintStream;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
@@ -27,15 +25,13 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     private void seedData() {
         BookDto b1 = new BookDto(0, "The Great Gatsby", "F. Scott Fitzgerald", "1925", "Classic");
         BookDto b2 = new BookDto(1, "To Kill a Mockingbird", "Harper Lee", "1960", "Fiction");
-        this.printAllBooksById(1);
-
+        this.bookService.addBook(b1); // Сохранение книги b1 в базе данных
+        this.bookService.addBook(b2); // Сохранение книги b2 в базе данных
+        this.printBookById(1);
     }
 
-    private void printAllBooksById(int id) {
-        List var10000 = this.bookService.findBook(id);
-        PrintStream var10001 = System.out;
-        Objects.requireNonNull(var10001);
-        var10000.forEach(var10001::println);
+    private void printBookById(int id) {
+        Optional<BookDto> book = this.bookService.findBook(id);
+        book.ifPresent(System.out::println);
     }
-
 }

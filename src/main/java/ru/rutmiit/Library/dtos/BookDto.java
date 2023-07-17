@@ -15,6 +15,9 @@ public class BookDto {
         this.genre = genre;
     }
 
+    public BookDto() {
+    }
+
     public int getBookId() {
         return bookId;
     }
