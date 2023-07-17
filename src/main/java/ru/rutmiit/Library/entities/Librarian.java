@@ -1,18 +1,34 @@
 package ru.rutmiit.Library.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-public class Librarian {
+@Entity
+@Table(
+        name = "Librarians"
+)
+public class Librarian extends Human {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String name;
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    @Column(
+            name = "librarianId"
+    )
+    protected Long librarianId;
 
-    private String email;
+    public Librarian(String name, String email, String address, String phone, Long librarianId) {
+        super(name, email, address, phone);
+        this.librarianId = librarianId;
+    }
 
-    private String address;
+    public Librarian() {
+    }
 
-    private String phone;
+    public Long getLibrarianId() {
+        return librarianId;
+    }
+
+    public void setLibrarianId(Long readerId) {
+        this.librarianId = readerId;
+    }
 }

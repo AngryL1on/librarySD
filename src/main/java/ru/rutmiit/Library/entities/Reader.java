@@ -1,21 +1,35 @@
 package ru.rutmiit.Library.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Reader {
+@Table(
+        name = "Readers"
+)
+public class Reader extends Human {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long readerId;
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    @Column(
+            name = "readerId"
+    )
+    protected Long readerId;
 
-    private String name;
+    public Reader(Long readerId, String name, String email, String address, String phone) {
+        super(name, email, address, phone);
+        this.readerId = readerId;
+    }
 
-    private String email;
+    public Reader() {
 
-    private String address;
+    }
 
-    private String phone;
+    public Long getReaderId() {
+        return readerId;
+    }
+
+    public void setReaderId(Long readerId) {
+        this.readerId = readerId;
+    }
 }
