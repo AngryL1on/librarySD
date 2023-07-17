@@ -17,14 +17,14 @@ public class RentalBook {
     @Embeddable
     public static class Id implements Serializable {
         @Column(name = "bookId")
-        private Long bookId;
+        private Integer bookId;
         @Column(name = "readerId")
-        private Long readerId;
+        private Integer readerId;
 
         public Id() {
         }
 
-        public Id(Long bookId, Long readerId) {
+        public Id(Integer bookId, Integer readerId) {
             this.bookId = bookId;
             this.readerId = readerId;
         }

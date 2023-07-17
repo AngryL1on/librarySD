@@ -17,7 +17,7 @@ public class Librarian extends Human {
     @Column(
             name = "librarianId"
     )
-    protected Long librarianId;
+    protected Integer librarianId;
 
     @ManyToMany
     @JoinTable(
@@ -27,7 +27,7 @@ public class Librarian extends Human {
     )
     private Set<Reader> readers = new HashSet<>();
 
-    public Librarian(String name, String email, String address, String phone, Long librarianId) {
+    public Librarian(String name, String email, String address, String phone, Integer librarianId) {
         super(name, email, address, phone);
         this.librarianId = librarianId;
     }
@@ -43,11 +43,11 @@ public class Librarian extends Human {
         this.readers = readers;
     }
 
-    public Long getLibrarianId() {
+    public Integer getLibrarianId() {
         return librarianId;
     }
 
-    public void setLibrarianId(Long readerId) {
+    public void setLibrarianId(Integer readerId) {
         this.librarianId = readerId;
     }
 

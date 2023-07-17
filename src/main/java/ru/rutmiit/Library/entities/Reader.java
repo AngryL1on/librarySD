@@ -15,7 +15,7 @@ public class Reader extends Human {
     @Column(
             name = "readerId"
     )
-    protected Long readerId;
+    protected Integer readerId;
 
     @ManyToMany(mappedBy = "readers")
     private Set<Librarian> librarians = new HashSet<>();
@@ -23,7 +23,7 @@ public class Reader extends Human {
     @OneToMany(mappedBy = "reader")
     private Set<RentalBook> rentalbooks = new HashSet<>();
 
-    public Reader(Long readerId, String name, String email, String address, String phone) {
+    public Reader(Integer readerId, String name, String email, String address, String phone) {
         super(name, email, address, phone);
         this.readerId = readerId;
     }
@@ -40,11 +40,11 @@ public class Reader extends Human {
         this.librarians = librarians;
     }
 
-    public Long getReaderId() {
+    public Integer getReaderId() {
         return readerId;
     }
 
-    public void setReaderId(Long readerId) {
+    public void setReaderId(Integer readerId) {
         this.readerId = readerId;
     }
 

@@ -1,51 +1,69 @@
 package ru.rutmiit.Library.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.rutmiit.Library.dtos.BookDto;
 import ru.rutmiit.Library.entities.Book;
 import ru.rutmiit.Library.services.BookService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/books")
 public class BookController {
-    private final BookService bookService;
-
     @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    private BookService bookService;
+
+    public BookController() {
     }
 
-    @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.getAllBooks();
-        return ResponseEntity.ok(books);
+    @GetMapping("/books")
+    Iterable<BookDto> all() {
+        return this.bookService.getAll();
     }
 
-    @GetMapping("/{bookId}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long bookId) {
-        Optional<Book> book = bookService.getBookById(bookId);
-        return book.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/books/{id}")
+    BookDto one(@PathVariable Integer bookId) throws Throwable {
+        return (BookDto)this.bookService.findBook(bookId).orElseThrow(() -> {
+            return new BookNotFoundException("Could not find book with id: " + bookId);
+        });
     }
 
-    @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
-        Book createdBook = bookService.createBook(book);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
+    @GetMapping("/books/title/{title}")
+    List<BookDto> booksByTitle(@RequestParam("title") String title) throws Throwable {
+        return Collections.singletonList((BookDto) this.bookService.findBookByTitle(title).orElseThrow(() -> {
+            return new BookNotFoundException("Could not find book with title: " + title);
+        }));
     }
 
-    @PutMapping("/{bookId}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long bookId, @RequestBody Book updatedBook) {
-        Book updated = bookService.updateBook(bookId, updatedBook);
-        return ResponseEntity.ok(updated);
+    @GetMapping("/books/autor/{autor}")
+    List<BookDto> booksByAuthor(@RequestParam("author") String author) throws Throwable {
+        return Collections.singletonList((BookDto) this.bookService.findBooksByAuthor(author).orElseThrow(() -> {
+            return new BookNotFoundException("Could not find book with author: " + author);
+        }));
+    }
+
+    @GetMapping("/books/publicationyear/{publicationYear}")
+    BookDto oneByPublicationYear(@PathVariable Integer publicationYear) throws Throwable {
+        return (BookDto) this.bookService.findBookByPublicationYear(publicationYear)
+                .orElseThrow(() -> new BookNotFoundException("Could not find book with publication year: " + publicationYear));
+    }
+
+    @GetMapping("/books/genre/{genre}")
+    BookDto oneByGenre(@PathVariable String genre) throws Throwable {
+        return (BookDto) this.bookService.findBookByGenre(genre)
+                .orElseThrow(() -> new BookNotFoundException("Could not find book with genre: " + genre));
+    }
+
+    @PostMapping({"/books"})
+    BookDto newBook(@RequestBody BookDto newBook) {
+        return this.bookService.addBook(newBook);
     }
 
     @DeleteMapping("/{bookId}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long bookId) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Integer bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.noContent().build();
     }

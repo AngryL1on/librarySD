@@ -10,7 +10,7 @@ import java.util.Set;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
+    private Integer bookId;
 
     private String title;
 
@@ -24,7 +24,7 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private Set<RentalBook> rentalbooks = new HashSet<>();
 
-    public Book(Long bookId, String title, String author, Integer publicationYear, String genre) {
+    public Book(Integer bookId, String title, String author, Integer publicationYear, String genre) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
@@ -34,10 +34,10 @@ public class Book {
 
     protected Book(){}
 
-    public Long getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
-    public void setBookId(Long bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
