@@ -12,7 +12,7 @@ public class Review {
     private Integer readerId;
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", referencedColumnName = "bookId")
     private Book book;
 
     private String comment;

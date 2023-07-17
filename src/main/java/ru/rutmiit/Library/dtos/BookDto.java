@@ -4,14 +4,14 @@ public class BookDto {
     private int bookId;
     private String title;
     private String author;
-    private String publicationDate;
+    private Integer publicationYear;
     private String genre;
 
-    public BookDto(int bookId, String title, String author, String publicationDate, String genre) {
+    public BookDto(int bookId, String title, String author, Integer publicationYear, String genre) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
-        this.publicationDate = publicationDate;
+        this.publicationYear = publicationYear;
         this.genre = genre;
     }
 
@@ -30,8 +30,8 @@ public class BookDto {
         return author;
     }
 
-    public String getPublicationDate() {
-        return publicationDate;
+    public Integer getPublicationDate() {
+        return publicationYear;
     }
 
     public String getGenre() {
