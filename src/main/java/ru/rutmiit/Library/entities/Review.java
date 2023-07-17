@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(
-        name = "Comments"
+        name = "Reviews"
 )
-public class Сomment {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
@@ -17,14 +17,14 @@ public class Сomment {
 
     private String comment;
 
-    public Сomment(Long commentId, Long readerId, Long bookId, String comment) {
+    public Review(Long commentId, Long readerId, Long bookId, String comment) {
         this.commentId = commentId;
         this.readerId = readerId;
         this.bookId = bookId;
         this.comment = comment;
     }
 
-    public Сomment() {
+    public Review() {
 
     }
 
