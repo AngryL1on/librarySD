@@ -3,9 +3,7 @@ package ru.rutmiit.Library.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-        name = "Reviews"
-)
+@Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +24,7 @@ public class Review {
         this.comment = comment;
     }
 
-    public Review() {
+    protected Review() {
 
     }
 
@@ -57,5 +55,10 @@ public class Review {
     }
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Review { readerId=" + readerId + ", bookId=" + book.getBookId() + ", comment=" + comment + " }";
     }
 }

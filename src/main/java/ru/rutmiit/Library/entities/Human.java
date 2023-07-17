@@ -21,7 +21,7 @@ public abstract class Human {
         this.phone = phone;
     }
 
-    public Human() {
+    protected Human() {
     }
 
     public String getName() {

@@ -50,4 +50,10 @@ public class Librarian extends Human {
     public void setLibrarianId(Long readerId) {
         this.librarianId = readerId;
     }
+
+    @Override
+    public String toString() {
+        return "Librarian { librarianId=" + librarianId + ", name=" + name + ", address=" + address + ", phone="
+                + phone + ", email=" + email + " }";
+    }
 }

@@ -3,10 +3,10 @@ package ru.rutmiit.Library.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 @Entity
-@Table(
-        name = "Books"
-)
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,9 @@ public class Book {
 
     private String genre;
 
+    @OneToMany(mappedBy = "book")
+    private Set<RentalBook> rentalbooks = new HashSet<>();
+
     public Book(Long bookId, String title, String author, Integer publicationYear, String genre) {
         this.bookId = bookId;
         this.title = title;
@@ -29,7 +32,7 @@ public class Book {
         this.genre = genre;
     }
 
-    public Book(){}
+    protected Book(){}
 
     public Long getBookId() {
         return bookId;
@@ -65,4 +68,11 @@ public class Book {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    @Override
+    public String toString() {
+        return "Book { bookId=" + bookId + ", title=" + title + ", author=" + author + ", publicationYear="
+                + publicationYear + ", genre=" + genre + " }";
+    }
+
 }
