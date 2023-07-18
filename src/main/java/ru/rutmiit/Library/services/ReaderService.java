@@ -2,14 +2,17 @@ package ru.rutmiit.Library.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.Library.dtos.ReaderDto;
 import ru.rutmiit.Library.entities.Reader;
+import ru.rutmiit.Library.entities.Review;
 import ru.rutmiit.Library.repositories.ReaderRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Service
 public class ReaderService {
@@ -86,5 +89,8 @@ public class ReaderService {
         return readerRepository.findAll();
     }
 
+    public List<Reader> findByLibrarian(@Param("librarianId") int librarianId) {
+        return readerRepository.findByLibrarian(librarianId);
+    }
 }
 

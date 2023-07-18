@@ -57,4 +57,15 @@ public class LibrarianDto {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "LibrarianDto{" +
+                "librarianId=" + librarianId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

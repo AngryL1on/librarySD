@@ -53,4 +53,13 @@ public class RentalDto {
         this.rentalDate = rentalDate;
     }
 
+    @Override
+    public String toString() {
+        return "RentalDto{" +
+                "rentalId=" + rentalId +
+                ", book=" + book +
+                ", reader=" + reader +
+                ", rentalDate=" + rentalDate +
+                '}';
+    }
 }

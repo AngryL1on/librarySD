@@ -2,6 +2,7 @@ package ru.rutmiit.Library.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.Library.dtos.ReviewDto;
 import ru.rutmiit.Library.entities.Review;
@@ -61,4 +62,9 @@ public class ReviewService {
     public Optional<ReviewDto> findReview(Integer reviewId) {
         return Optional.ofNullable((ReviewDto)this.modelMapper.map(this.reviewRepository.findById(reviewId), ReviewDto.class));
     }
+
+    public List<Review> findByReader(@Param("readerId") int readerId) {
+        return reviewRepository.findByReader(readerId);
+    }
+
 }

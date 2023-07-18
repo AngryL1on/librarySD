@@ -9,9 +9,9 @@ public class ReaderDto {
     private String address;
     private String phoneNumber;
 
-    private Librarian librarian;
+    private LibrarianDto librarian;
 
-    public ReaderDto (int readerId, String name, String email, String address, String phoneNumber, Librarian librarian) {
+    public ReaderDto (int readerId, String name, String email, String address, String phoneNumber, LibrarianDto librarian) {
         this.readerId = readerId;
         this.name = name;
         this.email = email;
@@ -63,11 +63,23 @@ public class ReaderDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public Librarian getLibrarian() {
+    public LibrarianDto getLibrarian() {
         return librarian;
     }
 
-    public void setLibrarian(Librarian librarian) {
+    public void setLibrarian(LibrarianDto librarian) {
         this.librarian = librarian;
+    }
+
+    @Override
+    public String toString() {
+        return "ReaderDto{" +
+                "readerId=" + readerId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", librarian=" + librarian +
+                '}';
     }
 }

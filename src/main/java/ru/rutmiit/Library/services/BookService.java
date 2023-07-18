@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.Library.dtos.BookDto;
 import ru.rutmiit.Library.entities.Book;
+import ru.rutmiit.Library.entities.Review;
 import ru.rutmiit.Library.repositories.BookRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
+import ru.rutmiit.Library.repositories.ReviewRepository;
 
 @Service
 public class BookService {
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -79,4 +83,5 @@ public class BookService {
     public Optional<Object> findBookByGenre(String genre) {
         return Optional.ofNullable((BookDto) this.modelMapper.map(this.bookRepository.findByGenre(genre), BookDto.class));
     }
+
 }

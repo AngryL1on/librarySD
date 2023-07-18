@@ -4,8 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.Library.dtos.LibrarianDto;
+import ru.rutmiit.Library.dtos.ReaderDto;
 import ru.rutmiit.Library.entities.Librarian;
+import ru.rutmiit.Library.entities.Reader;
+import ru.rutmiit.Library.entities.Review;
 import ru.rutmiit.Library.repositories.LibrarianRepository;
+import ru.rutmiit.Library.repositories.ReaderRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +21,8 @@ public class LibrarianService {
 
         @Autowired
         private LibrarianRepository librarianRepository;
+        @Autowired
+        private ReaderRepository readerRepository;
 
         @Autowired
         private ModelMapper modelMapper;
@@ -90,6 +96,8 @@ public class LibrarianService {
         public List<Librarian> getAllLibrarian() {
             return librarianRepository.findAll();
         }
+
+
 
 }
 
