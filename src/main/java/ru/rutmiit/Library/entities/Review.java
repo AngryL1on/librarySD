@@ -7,8 +7,10 @@ import jakarta.persistence.*;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
     private Integer commentId;
 
+    @Column(name = "reader_id")
     private Integer readerId;
 
     @ManyToOne
@@ -17,7 +19,7 @@ public class Review {
 
     private String comment;
 
-    public Review(Integer commentId, Integer readerId, Integer bookId, String comment) {
+    public Review(Integer commentId, Integer readerId, Book book, String comment) {
         this.commentId = commentId;
         this.readerId = readerId;
         this.book = book;
@@ -31,6 +33,7 @@ public class Review {
     public Integer getCommentId() {
         return commentId;
     }
+
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
     }
@@ -38,6 +41,7 @@ public class Review {
     public Integer getReaderId() {
         return readerId;
     }
+
     public void setReaderId(Integer readerId) {
         this.readerId = readerId;
     }
@@ -53,12 +57,13 @@ public class Review {
     public String getComment() {
         return comment;
     }
+
     public void setComment(String comment) {
         this.comment = comment;
     }
 
     @Override
     public String toString() {
-        return "Review { readerId=" + readerId + ", bookId=" + book.getBookId() + ", comment=" + comment + " }";
+        return "Review { readerId=" + readerId + ", book =" + book.getBookId() + ", comment=" + comment + " }";
     }
 }

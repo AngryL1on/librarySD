@@ -4,12 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rutmiit.Library.dtos.BookDto;
-import ru.rutmiit.Library.entities.Book;
 import ru.rutmiit.Library.services.BookService;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class BookController {
@@ -25,24 +20,22 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    BookDto one(@PathVariable Integer bookId) throws Throwable {
-        return (BookDto)this.bookService.findBook(bookId).orElseThrow(() -> {
-            return new BookNotFoundException("Could not find book with id: " + bookId);
-        });
+    BookDto one(@PathVariable Integer id) throws Throwable {
+        return (BookDto) this.bookService.findBook(id)
+                .orElseThrow(() -> new BookNotFoundException("Could not find book with id: " + id));
     }
 
     @GetMapping("/books/title/{title}")
-    List<BookDto> booksByTitle(@RequestParam("title") String title) throws Throwable {
-        return Collections.singletonList((BookDto) this.bookService.findBookByTitle(title).orElseThrow(() -> {
-            return new BookNotFoundException("Could not find book with title: " + title);
-        }));
+    BookDto booksByTitle(@PathVariable("title") String title) throws Throwable {
+        return (BookDto) this.bookService.findBookByTitle(title)
+                .orElseThrow(() -> new BookNotFoundException("Could not find book with title: " + title));
     }
 
-    @GetMapping("/books/autor/{autor}")
-    List<BookDto> booksByAuthor(@RequestParam("author") String author) throws Throwable {
-        return Collections.singletonList((BookDto) this.bookService.findBooksByAuthor(author).orElseThrow(() -> {
-            return new BookNotFoundException("Could not find book with author: " + author);
-        }));
+
+    @GetMapping("/books/author/{author}")
+    BookDto booksByAuthor(@PathVariable("author") String author) throws Throwable {
+        return (BookDto) this.bookService.findBooksByAuthor(author)
+                .orElseThrow(() -> new BookNotFoundException("Could not find book with author: " + author));
     }
 
     @GetMapping("/books/publicationyear/{publicationYear}")
@@ -62,7 +55,7 @@ public class BookController {
         return this.bookService.addBook(newBook);
     }
 
-    @DeleteMapping("/{bookId}")
+    @DeleteMapping("/books/{bookId}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.noContent().build();

@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import ru.rutmiit.Library.dtos.BookDto;
+import ru.rutmiit.Library.dtos.LibrarianDto;
+import ru.rutmiit.Library.dtos.ReaderDto;
+import ru.rutmiit.Library.entities.Reader;
 import ru.rutmiit.Library.services.BookService;
+import ru.rutmiit.Library.services.LibrarianService;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +18,8 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private LibrarianService librarianService;
 
     public CommandLineRunnerImpl() {
 

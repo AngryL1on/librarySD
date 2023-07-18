@@ -27,9 +27,8 @@ public class Librarian extends Human {
     )
     private Set<Reader> readers = new HashSet<>();
 
-    public Librarian(String name, String email, String address, String phone, Integer librarianId) {
-        super(name, email, address, phone);
-        this.librarianId = librarianId;
+    public Librarian(String name, String email, String address, String phoneNumber) {
+        super(name, email, address, phoneNumber);
     }
 
     public Librarian() {
@@ -53,7 +52,7 @@ public class Librarian extends Human {
 
     @Override
     public String toString() {
-        return "Librarian { librarianId=" + librarianId + ", name=" + name + ", address=" + address + ", phone="
-                + phone + ", email=" + email + " }";
+        return "Librarian { librarianId=" + librarianId + ", name=" + name + ", address=" + address + ", phoneNumber="
+                + phoneNumber + ", email=" + email + " }";
     }
 }

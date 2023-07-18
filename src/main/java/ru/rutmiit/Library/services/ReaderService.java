@@ -41,7 +41,7 @@ public class ReaderService {
             existingReader.setName(updatedReader.getName());
             existingReader.setEmail(updatedReader.getEmail());
             existingReader.setAddress(updatedReader.getAddress());
-            existingReader.setPhone(updatedReader.getPhone());
+            existingReader.setphoneNumber(updatedReader.getphoneNumber());
             return readerRepository.save(existingReader);
         } else {
             throw new IllegalArgumentException("Reader with ID " + readerId + " not found.");
@@ -64,8 +64,11 @@ public class ReaderService {
         return Optional.ofNullable((ReaderDto)this.modelMapper.map(this.readerRepository.findById(readerId), ReaderDto.class));
     }
 
-    public Optional<ReaderDto> findReaderByName(String name) {
-        return Optional.ofNullable((ReaderDto) this.modelMapper.map(this.readerRepository.findByName(name), ReaderDto.class));
+    public List<Reader> findReadersByName(String name) {
+        List<Reader> readers = readerRepository.findByName(name);
+        return readers.stream()
+                .map(reader -> modelMapper.map(reader, Reader.class))
+                .collect(Collectors.toList());
     }
 
     public Optional<ReaderDto> findReaderByEmail(String email) {
@@ -76,8 +79,8 @@ public class ReaderService {
         return Optional.ofNullable((ReaderDto) this.modelMapper.map(this.readerRepository.findByAddress(address), ReaderDto.class));
     }
 
-    public Optional<Object> findReaderByPhone(String phoneNumber) {
-        return Optional.ofNullable((ReaderDto) this.modelMapper.map(this.readerRepository.findByPhone(phoneNumber), ReaderDto.class));
+    public Optional<Object> findReaderByphoneNumber(String phoneNumber) {
+        return Optional.ofNullable((ReaderDto) this.modelMapper.map(this.readerRepository.findByphoneNumber(phoneNumber), ReaderDto.class));
     }
     public List<Reader> getAllReaders() {
         return readerRepository.findAll();

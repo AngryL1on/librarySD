@@ -12,13 +12,13 @@ public abstract class Human {
 
     protected String address;
 
-    protected String phone;
+    protected String phoneNumber;
 
-    public Human(String name, String email, String address, String phone) {
+    public Human(String name, String email, String address, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.address = address;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
     }
 
     protected Human() {
@@ -44,10 +44,10 @@ public abstract class Human {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getphoneNumber() {
+        return phoneNumber;
     }
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setphoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -7,24 +7,23 @@ import ru.rutmiit.Library.dtos.ReviewDto;
 import ru.rutmiit.Library.services.ReviewService;
 
 @RestController
-@RequestMapping("/reviews")
 public class ReviewController {
 
         @Autowired
         private ReviewService reviewService;
 
-        public ReviewController(){}
+        public ReviewController(){
+        }
 
-        @GetMapping("/review")
+        @GetMapping("/reviews")
         Iterable<ReviewDto> all() {
             return this.reviewService.getAll();
         }
 
-        @GetMapping("/review/{id}")
+        @GetMapping("/reviews/{reviewId}")
         ReviewDto one(@PathVariable Integer reviewId) throws Throwable {
-            return (ReviewDto)this.reviewService.findReview(reviewId).orElseThrow(() -> {
-                return new ReviewNotFoundException("Could not find review with id: " + reviewId);
-            });
+            return (ReviewDto)this.reviewService.findReview(reviewId)
+                    .orElseThrow(() -> new ReviewNotFoundException("Could not find review with id: " + reviewId));
         }
 
 
@@ -33,7 +32,7 @@ public class ReviewController {
             return this.reviewService.addReview(newReview);
         }
 
-        @DeleteMapping("/{reviewId}")
+        @DeleteMapping("/reviews/{reviewId}")
         public ResponseEntity<Void> deleteReview(@PathVariable Integer reviewId) {
             reviewService.deleteReview(reviewId);
             return ResponseEntity.noContent().build();

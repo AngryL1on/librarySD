@@ -34,7 +34,7 @@ public class ReaderDto {
         return address;
     }
 
-    public String getPhoneNumber() {
+    public String getphoneNumber() {
         return phoneNumber;
     }
 }

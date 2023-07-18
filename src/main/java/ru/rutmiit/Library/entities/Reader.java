@@ -23,8 +23,8 @@ public class Reader extends Human {
     @OneToMany(mappedBy = "reader")
     private Set<RentalBook> rentalbooks = new HashSet<>();
 
-    public Reader(Integer readerId, String name, String email, String address, String phone) {
-        super(name, email, address, phone);
+    public Reader(Integer readerId, String name, String email, String address, String phoneNumber) {
+        super(name, email, address, phoneNumber);
         this.readerId = readerId;
     }
 
@@ -50,7 +50,7 @@ public class Reader extends Human {
 
     @Override
     public String toString() {
-        return "Reader { readerId=" + readerId + ", name=" + name + ", address=" + address + ", phone="
-                + phone + ", email=" + email + " }";
+        return "Reader { readerId=" + readerId + ", name=" + name + ", address=" + address + ", phoneNumber="
+                + phoneNumber + ", email=" + email + " }";
     }
 }

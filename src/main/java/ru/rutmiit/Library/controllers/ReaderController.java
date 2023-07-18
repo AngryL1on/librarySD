@@ -1,21 +1,15 @@
 package ru.rutmiit.Library.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.rutmiit.Library.dtos.BookDto;
 import ru.rutmiit.Library.dtos.ReaderDto;
 import ru.rutmiit.Library.entities.Reader;
-import ru.rutmiit.Library.services.BookService;
 import ru.rutmiit.Library.services.ReaderService;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/readers")
 public class ReaderController {
     @Autowired
     private ReaderService readerService;
@@ -28,36 +22,36 @@ public class ReaderController {
     }
 
     @GetMapping("/readers/{id}")
-    ReaderDto one(@PathVariable Integer readerId) throws Throwable {
-        return (ReaderDto)this.readerService.findReader(readerId).orElseThrow(() -> {
-            return new ReaderNotFoundException("Could not find reader with id: " + readerId);
-        });
+    ReaderDto one(@PathVariable Integer id) throws Throwable {
+        return (ReaderDto)this.readerService.findReader(id)
+                .orElseThrow(() -> new ReaderNotFoundException("Could not find librarian with id: " + id));
     }
 
     @GetMapping("/readers/name/{name}")
-    List<ReaderDto> readersByName(@RequestParam("name") String name) throws Throwable {
-        return Collections.singletonList((ReaderDto) this.readerService.findReaderByName(name).orElseThrow(() -> {
-            return new ReaderNotFoundException("Could not find reader with title: " + name);
-        }));
+    List<Reader> readersByName(@PathVariable String name) {
+        List<Reader> readers = readerService.findReadersByName(name);
+        if (readers.isEmpty()) {
+            throw new LibrarianNotFoundException("Could not find librarians with name: " + name);
+        }
+        return readers;
     }
 
     @GetMapping("/readers/email/{email}")
-    List<ReaderDto> readersByEmail(@RequestParam("email") String email) throws Throwable {
-        return Collections.singletonList((ReaderDto) this.readerService.findReaderByEmail(email).orElseThrow(() -> {
-            return new ReaderNotFoundException("Could not find reader with email: " + email);
-        }));
+    ReaderDto readersByEmail(@PathVariable("email") String email) throws Throwable {
+        return (ReaderDto) this.readerService.findReaderByEmail(email)
+                .orElseThrow(() -> new ReaderNotFoundException("Could not find librarian with email: " + email));
     }
 
     @GetMapping("/readers/address/{address}")
     ReaderDto oneByAddress(@PathVariable String address) throws Throwable {
         return (ReaderDto) this.readerService.findReaderByAddress(address)
-                .orElseThrow(() -> new ReaderNotFoundException("Could not find reader with address: " + address));
+                .orElseThrow(() -> new ReaderNotFoundException("Could not find librarian with address: " + address));
     }
 
-    @GetMapping("/readers/phoneNumber/{phoneNumber}")
-    ReaderDto oneByPhone(@PathVariable String phoneNumber) throws Throwable {
-        return (ReaderDto) this.readerService.findReaderByPhone(phoneNumber)
-                .orElseThrow(() -> new ReaderNotFoundException("Could not find reader with phoneNumber: " + phoneNumber));
+    @GetMapping("/readers/phone/{phoneNumber}")
+    ReaderDto oneByphoneNumber(@PathVariable String phoneNumber) throws Throwable {
+        return (ReaderDto) this.readerService.findReaderByphoneNumber(phoneNumber)
+                .orElseThrow(() -> new ReaderNotFoundException("Could not find librarian with phoneNumber: " + phoneNumber));
     }
 
     @PostMapping({"/readers"})
@@ -65,11 +59,10 @@ public class ReaderController {
         return this.readerService.addReader(newReader);
     }
 
-    @DeleteMapping("/{readerId}")
+    @DeleteMapping("/readers/{readerId}")
     public ResponseEntity<Void> deleteReader(@PathVariable Long readerId) {
         readerService.deleteReader(readerId);
         return ResponseEntity.noContent().build();
     }
-
 }
 
