@@ -1,16 +1,17 @@
 package ru.rutmiit.Library.dtos;
 
 import ru.rutmiit.Library.entities.Book;
+import ru.rutmiit.Library.entities.Reader;
 
 public class ReviewDto {
     private int commentId;
-    private int readerId;
+    private Reader reader;
     private Book book;
     private String comment;
 
-    public ReviewDto(int commentId, int readerId, Book book, String comment) {
+    public ReviewDto(int commentId, Reader reader, Book book, String comment) {
         this.commentId = commentId;
-        this.readerId = readerId;
+        this.reader = reader;
         this.book = book;
         this.comment = comment;
     }
@@ -26,12 +27,12 @@ public class ReviewDto {
         this.commentId = commentId;
     }
 
-    public int getReaderId() {
-        return readerId;
+    public Reader getReader() {
+        return reader;
     }
 
-    public void setReaderId(int readerId) {
-        this.readerId = readerId;
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 
     public Book getBook() {

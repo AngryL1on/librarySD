@@ -61,8 +61,4 @@ public class ReviewService {
     public Optional<ReviewDto> findReview(Integer reviewId) {
         return Optional.ofNullable((ReviewDto)this.modelMapper.map(this.reviewRepository.findById(reviewId), ReviewDto.class));
     }
-
-    public List<Review> getAllReview() {
-        return reviewRepository.findAll();
-    }
 }

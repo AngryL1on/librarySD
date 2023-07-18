@@ -1,37 +1,48 @@
 package ru.rutmiit.Library.dtos;
 
+import ru.rutmiit.Library.entities.Book;
+import ru.rutmiit.Library.entities.Reader;
+
 import java.sql.Timestamp;
 
 public class RentalDto {
-    private Integer bookId;
-    private Integer readerId;
+    private int rentalId;
+    private Book book;
+    private Reader reader;
     private Timestamp rentalDate;
-    private Timestamp dueDate;
 
-    public RentalDto(Integer bookId, Integer readerId, Timestamp rentalDate, Timestamp dueDate) {
-        this.bookId = bookId;
-        this.readerId = readerId;
+    public RentalDto(int rentalId, Book book, Reader reader, Timestamp rentalDate) {
+        this.rentalId = rentalId;
+        this.book = book;
+        this.reader = reader;
         this.rentalDate = rentalDate;
-        this.dueDate = dueDate;;
     }
 
     public RentalDto() {
     }
 
-    public Integer getBookId() {
-        return bookId;
+    public int getRentalId() {
+        return rentalId;
     }
 
-    public void setBookId(Integer bookId) {
-        this.bookId = bookId;
+    public void setRentalId(int rentalId) {
+        this.rentalId = rentalId;
     }
 
-    public Integer getReaderId() {
-        return readerId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setReaderId(Integer readerId) {
-        this.readerId = readerId;
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Reader getReader() {
+        return reader;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 
     public Timestamp getRentalDate() {
@@ -42,11 +53,4 @@ public class RentalDto {
         this.rentalDate = rentalDate;
     }
 
-    public Timestamp getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Timestamp dueDate) {
-        this.dueDate = dueDate;
-    }
 }

@@ -19,12 +19,7 @@ public class Librarian extends Human {
     )
     protected Integer librarianId;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Registration",
-            joinColumns = @JoinColumn( name = "librarianId"),
-            inverseJoinColumns = @JoinColumn(name = "reader_id")
-    )
+    @OneToMany
     private Set<Reader> readers = new HashSet<>();
 
     public Librarian(String name, String email, String address, String phoneNumber) {

@@ -9,35 +9,42 @@ import java.util.Set;
 @Table(name = "reader")
 public class Reader extends Human {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
-    @Column(
-            name = "readerId"
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @Column(            name = "readerId"
     )
     protected Integer readerId;
 
-    @ManyToMany(mappedBy = "readers")
-    private Set<Librarian> librarians = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "librarianId")
+    private Librarian librarian;
 
     @OneToMany(mappedBy = "reader")
     private Set<RentalBook> rentalbooks = new HashSet<>();
 
-    public Reader(Integer readerId, String name, String email, String address, String phoneNumber) {
+    public Reader(Integer readerId, String name, String email, String address, String phoneNumber, Librarian librarian) {
         super(name, email, address, phoneNumber);
         this.readerId = readerId;
+        this.librarian = librarian;
     }
 
     public Reader() {
 
     }
 
-    public Set<Librarian> getLibrarians() {
-        return librarians;
+    public Librarian getLibrarian() {
+        return librarian;
     }
 
-    public void setLibrarians(Set<Librarian> librarians) {
-        this.librarians = librarians;
+    public void setLibrarian(Librarian librarian) {
+        this.librarian = librarian;
+    }
+
+    public Set<RentalBook> getRentalbooks() {
+        return rentalbooks;
+    }
+
+    public void setRentalbooks(Set<RentalBook> rentalbooks) {
+        this.rentalbooks = rentalbooks;
     }
 
     public Integer getReaderId() {

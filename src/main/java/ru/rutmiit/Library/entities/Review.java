@@ -10,8 +10,9 @@ public class Review {
     @Column(name = "comment_id")
     private Integer commentId;
 
-    @Column(name = "reader_id")
-    private Integer readerId;
+    @ManyToOne
+    @JoinColumn(name = "reader_id", referencedColumnName = "readerId")
+    private Reader reader;
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "bookId")
@@ -19,9 +20,9 @@ public class Review {
 
     private String comment;
 
-    public Review(Integer commentId, Integer readerId, Book book, String comment) {
+    public Review(Integer commentId, Reader reader, Book book, String comment) {
         this.commentId = commentId;
-        this.readerId = readerId;
+        this.reader = reader;
         this.book = book;
         this.comment = comment;
     }
@@ -38,12 +39,12 @@ public class Review {
         this.commentId = commentId;
     }
 
-    public Integer getReaderId() {
-        return readerId;
+    public Reader getReader() {
+        return reader;
     }
 
-    public void setReaderId(Integer readerId) {
-        this.readerId = readerId;
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 
     public Book getBook() {
@@ -60,10 +61,5 @@ public class Review {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    @Override
-    public String toString() {
-        return "Review { readerId=" + readerId + ", book =" + book.getBookId() + ", comment=" + comment + " }";
     }
 }
